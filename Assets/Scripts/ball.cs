@@ -17,4 +17,21 @@ public class Ball : MonoBehaviour
         float y = Random.Range(-1f, 1f);
         rb.velocity = new Vector2(x, y).normalized * speed;
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "WallTop" ||
+            collision.gameObject.name == "WallBottom")
+        {
+            SoundManager.Instance.PlayBallBoundary();
+        }
+        else if (collision.gameObject.name == "PlayerPaddle")
+        {
+            SoundManager.Instance.PlayPlayerPaddleHit();
+        }
+        else if (collision.gameObject.name == "AIPaddle")
+        {
+            SoundManager.Instance.PlayAIPaddleHit();
+        }
+    }
 }

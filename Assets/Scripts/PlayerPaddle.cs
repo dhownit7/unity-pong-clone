@@ -14,5 +14,14 @@ public class PlayerPaddle : MonoBehaviour
         Vector3 pos = transform.position;
         pos.y = Mathf.Clamp(pos.y, -boundary, boundary);
         transform.position = pos;
+
+        void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.name == "WallTop" ||
+                collision.gameObject.name == "WallBottom")
+            {
+                SoundManager.Instance.PlayPaddleBoundary();
+            }
+        }
     }
 }
